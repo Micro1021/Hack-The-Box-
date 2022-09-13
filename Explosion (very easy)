@@ -1,0 +1,51 @@
+Explosion (very easy)
+
+Enumeration:
+
+First start with nmap to scan the target machine, we are looking for information related to the remote desktop protocol IP, as the first question asks.
+
+nmap -sV <target machine ip> 
+(replace target machine ip with the ip you are given)
+
+We see a number of ports open but we are looking for the remote desktop protocol port number, which is port 3389.
+
+The service running on port 3389 is ms-wbt-server, a Microsoft based service
+
+Task 6 asks a question regarding specification of host's IP address using "xfreerdp" 
+
+We can now look into xfreerdp and find more information
+
+Foothold:
+
+Let's use the command 'xfreerdp -h' (-h for help)
+
+At the top of the documentation we can see:
+"Usage: xfreerdp [file] [options] [/v:<server>[:port]]" 
+
+In this instance, server can be replaced with IP, and that is your answer to task 6.
+
+Ignoring the file, options, and port command, we can use "/v: <target machine ip>" to gain more information using xfreerdp. 
+
+Press Y and press enter to trust the certificate
+
+For a domain we can try Explosion, the boxes name. 
+
+Now a password is prompted, if this particular service has been misconfigured we may be able to enter without a password.
+
+Just press enter to try a blank password
+
+This did not work!
+
+When using xfreerdp, if we don't specify a username, it uses our VM username as default.
+
+Lets provide a username this time using /u:Administrator
+
+This immediately prompts us with a password, no domain is asked, let's try no password again. 
+
+We got in! 
+
+Click no, and minimize the Server Manager Dashboard. You should be looking at a remote desktop of the target machine
+
+Open the file that says flag.
+
+You should see the flag! Good work!
