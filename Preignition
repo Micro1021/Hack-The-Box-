@@ -1,0 +1,55 @@
+Preignition (very easy)
+
+Enumeration: 
+
+First start with nmap to scan the target machine, we are looking for information related to port 80/tcp
+
+"nmap -T4 -sV <target machine ip>" 
+
+We find a server name and version number for port 80 (nginx 1.14.2)
+
+Since we have an IP and a port number (80) which is asssociated with HTTP, let's check what the website looks like
+
+type: http://<target machine ip>
+
+The website doesn't have much, but that is okay. 
+
+Task 5 asks for a switch name related to tthe Gobuster tool
+
+Let's install gobuster if you haven't already. 
+
+To keep it tidy, make a directory for gobuster and change into that directory
+
+"mkdir gobuster" "cd gobuster/"
+
+now we can install the Gobuster tool since it isn't default installed in Kali Linux
+
+"apt-get install gobuster" (Make sure you are root)
+
+You may also need to install more than just a default wordlist, try seclists.
+
+Seclists is great for brute-forcing Directories and Files
+
+"apt -y install seclists" (the -y flag says yes to all popups you get during installation)
+
+We can now get more info on the tool by using the flag -h (for help)
+
+Unlike other record scanners, Gobuster works considerably faster than tools such as DirBuster and DIRB. 
+
+One downside to Gobuster is the lack of recursive directory exploration. What this means that the search lacks depth and will only scan what you give it. You can find wrappers online to help gobuster scan newly discovered directories, but gobuster was made to not be recursive.
+
+using the "dir" switch with the added "-u" flag (for urls) we can find extra content in a specific target domain, or its subdomain
+
+On its own, the command "gobuster dir -u <target machine ip>" won't do anything. This is because you need to specify a wordlist for it to search through. This can be done using the "-w" flag, along with a directory path leading to a wordlist. 
+
+Try using a short wordlist (which will still take a little while) from the directory path "usr/share/dirb/wordlists/common.txt"
+
+Common.txt is a short pre-installed wordlist, this should give you a decent overview 
+
+Don't forget to add -o to output your findings to a text file
+
+gobuster dir -u <target machine ip> -w /usr/share/dirb/wordlists/common.txt -o <enter text file here> 
+
+This will take a minute or two..
+
+Your output should be the answer to task 6 and 7
