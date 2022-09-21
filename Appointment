@@ -1,0 +1,28 @@
+Appointment (very easy)
+
+Enumeration: 
+
+Start with mapping the target machine to see what ports are open
+
+"nmap -T4 -sV <target machine ip>" (-T4 speeds up the scan, -sV probes open ports to find version and service info)
+
+your answer to task 5 should be the output of "VERSION" on the open http port
+
+after you answer all the the "googleable" questions you are left with a task to submit the root flag, like usual. 
+
+Since it's an http port, let's take a look at what's on the site
+
+search in your browser: "http://<targetmachineip" 
+
+We are prompted with a login screen 
+
+Some of the earlier questions ask us about brute-forcing, web-application folder terminology, and gobuster. We can infer that there may be directories we cannot access from this login screen. Let's get to searching.
+
+"dir" is the switch we use to look for directories in gobuster, we can use the command "gobuster dir -u <target machine ip> -w <wordlist> -o <output folder>" 
+note: you can find all of the command and flag definitions with -h (help page) 
+-u (denotes your target URL), -w (denotes your path to a wordlist you want to use), and -o (is the file location you want to output your results) 
+
+Fill in the appropriate information and search for directories! 
+
+
+(Unfinished)  
